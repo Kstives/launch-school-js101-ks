@@ -42,3 +42,15 @@ console.log(solve(["encode","abc","xyzD","ABmD"])); // [1, 3, 1, 3]
 console.log(solve(["encode","abc","xyzD",""])); // [1, 3, 1, 0]
 console.log(solve([])); // []
 */
+
+// ALGORITHM
+
+/*
+1. Ask for input of strings called STRINGS
+3. Create an ordered list with the all alphabet characters called ALPHABET
+4.. Iterate through each position in ALPHABET
+5.. Iterate through each position in STRINGS
+6. Create array called MATCHES
+6. Does the first position of ALPHABET match the first position of the first position in STRINGS?
+If yes, 
+*/
