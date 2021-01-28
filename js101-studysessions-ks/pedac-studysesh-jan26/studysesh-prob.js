@@ -128,8 +128,10 @@ Input will consist of alphabetic characters, both uppercase and lowercase.  No s
       b. If no, set the value of MATCH_COUNT as the element of the index in MATCHES that corresponds to the current string's index, 
       MATCHES[0] = 2
       repeat step 5 & 6 until all of STRINGS elements are iterated through
-    7. Return MATCHES
+    7. Set Match_COUNT(4) = 0 and Return MATCHES
+    Match_Count(0)
     MATCHES = [4]
+
 
   */
 
@@ -164,26 +166,23 @@ positionMatch(["abode","ABc","xyzD"]); // [4,3,1]
 
 
 
-// function positionMatch(array) {
-//   const ALPHABET = ['abcdefghijklmnopqrstuvwxyz'];
-//   let matches = [];
-//   let matchCount = 0;
+function positionMatch(array) {
+  const ALPHABET = ['abcdefghijklmnopqrstuvwxyz'];
+  let matches = [];
+  let matchCount = 0;
 
-//   for (let i = 0; i < array.length; i += 1) {
-//      for (let letter = 0; letter < array[i].length; letter += 1) {
-//        if (array[i].indexOf(array[i][letter]) === ALPHABET[0].search(array[i][letter])) {
-//          matchCount += 1;
-//          matches[i] = matchCount;
-//        } 
-//        else if () {
-         
-//        } else {
-//         matches[i] = matchCount;
-//        }
-//      }   
-//     } 
-// return matches;
-// } // close of function
+  for (let i = 0; i < array.length; i += 1) {
+     for (let letter = 0; letter < array[i].length; letter += 1) {
+       if (array[i].indexOf(array[i][letter]) === ALPHABET[0].search(array[i][letter])) {
+         matchCount += 1;
+         matches[i] = matchCount;
+       } else {
+        matches[i] = matchCount;
+       }
+     }
+    }
+return matches;
+} // close of function
 
 
-// console.log(positionMatch(["abode","ABc","xyzD"])); // [4,3,1]
+console.log(positionMatch(["abode","ABc","xyzD"])); // [4,3,1]

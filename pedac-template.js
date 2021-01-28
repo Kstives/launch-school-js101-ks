@@ -12,14 +12,14 @@
     Output:
     */
   
-  // MAKE THE REQUIREMENTS EXPLICIT
+  // TERMS OF THE PROBLEM DOMAIN
     /*
     Terms of the problem domain:
     *
     *
     */
   
-  // IDENTIFY THE RULES (IMPLICIT REQUIREMENTS)
+  // IDENTIFY THE RULES (EXPLICIT & IMPLICIT REQUIREMENTS)
     /*
     1.
 
