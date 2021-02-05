@@ -37,7 +37,10 @@ D: DATA STRUCTURE
 
 A: ALGORITHM
 
+START
   1.
+
+END
 
   Verified this works with an example:
     Input:
