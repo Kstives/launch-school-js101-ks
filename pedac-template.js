@@ -13,7 +13,6 @@ P: UNDERSTAND THE PROBLEM
 TERMS OF THE PROBLEM DOMAIN
   Terms of the problem domain:
     *
-    *
 
 IDENTIFY THE RULES (EXPLICIT & IMPLICIT REQUIREMENTS)
 
@@ -22,9 +21,7 @@ IDENTIFY THE RULES (EXPLICIT & IMPLICIT REQUIREMENTS)
   Clarifying Questions:
     1.
 
-
  MENTAL MODEL:
-
 
  E: EXAMPLES/TEST CASES
  (based on the above rules and edge cases)
@@ -32,23 +29,26 @@ IDENTIFY THE RULES (EXPLICIT & IMPLICIT REQUIREMENTS)
     Input:
     Output:
 
-
 D: DATA STRUCTURE
 
 A: ALGORITHM
 
 START
+
   1.
 
 END
 
-  Verified this works with an example:
-    Input:
-    Output:
 
-    1.
+Verified this works with an example:
+  Input:
+  Output:
 
+START
 
+  1.
+
+END
  */
 
 // C: CODE WITH INTENT
