@@ -1,0 +1,13 @@
+// Lesson 3: Easy 3 Question 2
+// What will the following code output?
+console.log([1, 2, 3] + [4, 5]);
+
+// [1, 2, 3, [4, 5]]
+
+// launch school solution:
+// 1,2,34,5
+/*
+In some languages you can use the + to concatenate two arrays, but not in
+JavaScript. In JavaScript, the + operator first converts the arrays to strings,
+and then concatenates the strings, so the output is the string 1,2,34,5
+*/
