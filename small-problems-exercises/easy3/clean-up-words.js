@@ -57,17 +57,32 @@ END
 
 // C: CODE WITH INTENT
 
-function cleanUp(string) {
-  let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm','n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+// function cleanUp(string) {
+//   let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm','n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   
+//   for (let char = 0; char < string.length; char += 1) {
+//     if (alphabet.includes(string[char])) {
+//       continue;
+//     } else {
+//       string = string.replace(string[char], ' ');
+//     }
+//   }
+//   return string;
+// }
+
+// console.log(cleanUp("---what's my +*& line?"));    // " what s my line "
+
+function cleanUp(string) {
+  string = string.replace(/[^a-z0-9\s]/g, ' ');
   for (let char = 0; char < string.length; char += 1) {
-    if (alphabet.includes(string[char])) {
+    if (string[char] === ' ' && string[char + 1] === ' ') {
       continue;
-    } else {
-      string = string.replace(string[char], ' ');
+    }  else {
+      string.replace(string[char], '');
     }
   }
   return string;
 }
 
-console.log(cleanUp("---what's my +*& line?"));    // " what s my line "
+console.log(cleanUp("---what's my +*& line?"));    // expected: " what s my line "
+// actually logs: '   what s my    line '
