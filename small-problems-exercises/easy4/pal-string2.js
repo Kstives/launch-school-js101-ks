@@ -23,12 +23,20 @@ END
        
 //   }
 // }
-function isRealPalindrome(string) {
-  // string = removeSymbols(string);
+
+function isPalindrome(string) {
   let stringReverse = string.split('').reverse().join('');
-  console.log(string);
-  console.log(stringReverse);
-  return string.toLowerCase() === stringReverse.toLowerCase();
+  return string === stringReverse;
+}
+function isRealPalindrome(string) {
+  let isAlphanumericRegEx = /\w/;
+  let alphanumericString = '';
+  for (let index = 0; index < string.length; index += 1) {
+    if (isAlphanumericRegEx.test(string[index])) {
+      alphanumericString += string[index].toLowerCase();
+    }
+  }
+  return isPalindrome(alphanumericString);
 }
 
 console.log(isRealPalindrome('madam'));               // true
