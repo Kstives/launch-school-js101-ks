@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /*
 PROBLEM:
 The time of day can be represented as the number of minutes before or after
@@ -65,18 +66,38 @@ A: ALGORITHM
 
 START
   Addressing positive numbers (time after midnight)
-  1. SET days = integer divided by 1140 (60 minutes in 24 hours)
+  IF integer is greater than 0:
+  1. SET days = integer divided by 1140 (60 minutes x 24 hours)
   2. SET hours = 0
   3. SET minutes = 0
   4. IF days divided by 60 equals 0
-    a. SET days divided by 60 as the value of hours
+    a. SET hours as days divided by 60
   ELSE
-    a. SET days divided by 60 rounded down as the value of hours
-    b. SET the remainder of days divided by 60 as the value of minutes
+    a. SET hours as days divided by 60 rounded down
+    b. SET minutes as the remainder of days divided by 60
   
-  Addressing negative numbers (time before midnight)
-  1.
+  Addressing positive numbers (time after midnight) - version 2 (loop)
+  IF integer is greater than 0:
+  1. SET count = 0
+  2. SET hours = 0
+  3. SET minutes = 0
+  4. WHILE count is less than integer
+    a. count + 1
+    b. SET minutes = count
+    c. IF minutes % 60 === 0
+      i. hours + 1
+    d. IF hours % 23 === 0 && minutes % 59 === 0
+      i. SET minutes = 0
+      ii. SET hours = 0
+  5. RETURN hours and minutes formated as hh:mm
 
+  Addressing negative numbers (time before midnight)
+  1. SET count = 1440
+  2. SET hours = 0
+  3. SET minutes = 0
+
+
+   
   Convert computed time to a string with HH:MM format
   1. CONVERT hours to a string
   2. CONVERT minutes to a string
@@ -118,45 +139,150 @@ function setFormat(hours, minutes) {
   return `${hoursString}:${minutesString}`;
   
 }
-function timeOfDay(integer) {
-  let days = integer % 1440;
-  let hours = 0;
-  let minutes = 0;
 
-  if (days % 60 === 0) {
-    hours = days / 60;
-  } else {
-    hours = Math.floor(days / 60);
-    minutes = days % 60;
+function beforeMidnight(negNum) {
+  let count = negNum;
+  let hours = 24;
+  let minutes = 60;
+
+  while (count < 0) {
+    count += 1;
+    minutes -= 1;
+
+    if (minutes === 0) {
+      hours -= 1;
+      minutes = 60;
+    }
+
+    if (hours === 0) {
+      hours = 24;
+      minutes = 60;
+    }
+
   }
-
   return setFormat(hours, minutes);
 }
 
+function afterMidnight(posNum) {
+  let count = 0;
+  let hours = 0;
+  let minutes = 0;
+
+  while (count < posNum) {
+    count += 1;
+    minutes = count;
+
+    if (minutes % 60 === 0) {
+      hours += 1;
+      minutes = 0;
+    } else {
+      minutes = minutes % 60;
+    }
+
+    if (hours === 24) {
+      hours = 0;
+      minutes = 0;
+    }
+
+  }
+  return setFormat(hours, minutes);
+}
+// function afterMidnight(posNum) {
+//   let days = posNum % 1440;
+//   let hours = 0;
+//   let minutes = 0;
+
+//   if (days % 60 === 0) {
+//     hours = days / 60;
+//   } else {
+//     hours = Math.floor(days / 60);
+//     minutes = days % 60;
+//   }
+
+//   return setFormat(hours, minutes);
+// }
+
+function timeOfDay(integer) {
+  if (integer < 0) {
+    return beforeMidnight(integer);
+  } else {
+    return afterMidnight(integer);
+  }
+}
+
 /*
-1. CONVERT hours to a string
-  2. CONVERT minutes to a string
-  3. IF the amount of characters in hours string does not equal 2
-      a. Add '0' to the beginning of the string
-  4. IF the amount of characters in minutes string does not equal 2
-      a. Add '0' to the beginning of the string
-  5. SET time withe the value of Concatenate hours + : + minutes
-  6. RETURN time
+ IF integer is less than 0:
+  1. SET count = 0
+  2. SET hours = 0
+  3. SET minutes = 0
+  4. WHILE count is less than integer
+    a. count + 1
+    b. SET minutes = count
+    c. IF minutes % 60 === 0
+      i. hours + 1
+    d. IF hours === 23 && minutes === 59
+      i. SET minutes = 0
+      ii. SET hours = 0
+  5. RETURN hours and minutes formated as hh:mm
 */
 
 // all of the following should log true
-// console.log(timeOfDay(0) === "00:00");
-// console.log(timeOfDay(-3) === "23:57");
-// console.log(timeOfDay(35) === "00:35");
-// console.log(timeOfDay(-1437) === "00:03");
-// console.log(timeOfDay(3000) === "02:00");
-// console.log(timeOfDay(800) === "13:20");
-// console.log(timeOfDay(-4231) === "01:29");
+console.log(timeOfDay(0) === "00:00");
+console.log(timeOfDay(-3) === "23:57");
+console.log(timeOfDay(35) === "00:35");
+console.log(timeOfDay(-1437) === "00:03");
+console.log(timeOfDay(3000) === "02:00");
+console.log(timeOfDay(800) === "13:20");
+console.log(timeOfDay(-4231) === "01:29");
 
-console.log(timeOfDay(0));
-console.log(timeOfDay(-3));
-console.log(timeOfDay(35));
-console.log(timeOfDay(-1437));
-console.log(timeOfDay(3000));
-console.log(timeOfDay(800));
-console.log(timeOfDay(-4231));
+// console.log(timeOfDay(0)); // 00:00
+// console.log(timeOfDay(-3)); // 23:57
+// console.log(timeOfDay(35)); // 00:35
+// console.log(timeOfDay(-1437)); // 00:03
+// console.log(timeOfDay(3000)); // 02:00
+// console.log(timeOfDay(800)); // 13:20
+// console.log(timeOfDay(-4231)); // 01:29
+
+
+// launch school solution:
+const MINUTES_PER_HOUR = 60;
+const HOURS_PER_DAY = 24;
+const MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
+
+function leadingZero(number) {
+  return number < 10 ? `0${number}` : String(number);
+}
+
+function formatTime(hours, minutes) {
+  return `${leadingZero(hours)}:${leadingZero(minutes)}`;
+}
+
+function timeOfDay2(deltaMinutes) {
+  if (deltaMinutes < 0) {
+    deltaMinutes = (deltaMinutes % MINUTES_PER_DAY) + MINUTES_PER_DAY;
+  } else {
+    deltaMinutes = deltaMinutes % MINUTES_PER_DAY;
+  }
+
+  let hours = Math.floor(deltaMinutes / MINUTES_PER_HOUR);
+  let minutes = deltaMinutes % MINUTES_PER_HOUR;
+
+  return formatTime(hours, minutes);
+}
+
+console.log(timeOfDay2(0) === "00:00");
+console.log(timeOfDay2(-3) === "23:57");
+console.log(timeOfDay2(35) === "00:35");
+console.log(timeOfDay2(-1437) === "00:03");
+console.log(timeOfDay2(3000) === "02:00");
+console.log(timeOfDay2(800) === "13:20");
+console.log(timeOfDay2(-4231) === "01:29");
+
+// Further Exploration
+/*
+How would you approach this problem if you were allowed to use JavaScript's
+Date class? Suppose you also needed to consider the day of week? (Assume that
+deltaMinutes is the number of minutes before or after midnight between Saturday
+and Sunday; in such a method, a deltaMinutes value of -4231 would need to
+produce a return value of Thursday 01:29.)
+*/
