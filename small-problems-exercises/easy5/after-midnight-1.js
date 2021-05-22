@@ -23,7 +23,7 @@ P: UNDERSTAND THE PROBLEM
 TERMS OF THE PROBLEM DOMAIN
   Terms of the problem domain:
     * 1 hour = 60 minutes
-    * 24 hr = 1 day
+    * 24 hr = 1 day (1,440 minutes)
     * 0 === 00:00 === 12am
     * 720 === 12:00 === 12pm
 
@@ -142,10 +142,10 @@ function setFormat(hours, minutes) {
 
 function beforeMidnight(negNum) {
   let count = negNum;
-  let hours = 24;
+  let hours = 23;
   let minutes = 60;
 
-  while (count < 0) {
+  while (count < 0) { // -1437 === "00:03
     count += 1;
     minutes -= 1;
 
@@ -154,8 +154,8 @@ function beforeMidnight(negNum) {
       minutes = 60;
     }
 
-    if (hours === 0) {
-      hours = 24;
+    if (hours === -1) {
+      hours = 23;
       minutes = 60;
     }
 
@@ -176,7 +176,7 @@ function afterMidnight(posNum) {
       hours += 1;
       minutes = 0;
     } else {
-      minutes = minutes % 60;
+      minutes %= 60;
     }
 
     if (hours === 24) {
@@ -227,13 +227,13 @@ function timeOfDay(integer) {
 */
 
 // all of the following should log true
-console.log(timeOfDay(0) === "00:00");
-console.log(timeOfDay(-3) === "23:57");
-console.log(timeOfDay(35) === "00:35");
-console.log(timeOfDay(-1437) === "00:03");
-console.log(timeOfDay(3000) === "02:00");
-console.log(timeOfDay(800) === "13:20");
-console.log(timeOfDay(-4231) === "01:29");
+// console.log(timeOfDay(0) === "00:00");
+// console.log(timeOfDay(-3) === "23:57");
+// console.log(timeOfDay(35) === "00:35");
+// console.log(timeOfDay(-1437) === "00:03");
+// console.log(timeOfDay(3000) === "02:00");
+// console.log(timeOfDay(800) === "13:20");
+// console.log(timeOfDay(-4231) === "01:29");
 
 // console.log(timeOfDay(0)); // 00:00
 // console.log(timeOfDay(-3)); // 23:57
