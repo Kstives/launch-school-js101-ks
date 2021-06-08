@@ -28,3 +28,35 @@ copyOfArr[1].d = 'qux';
 
 console.log(arr);
 console.log(copyOfArr);
+
+// WORKING WITH CALLBACK FUNCTIONS
+
+// comparing transformation operations
+
+// for loop transformation
+console.log("FOR LOOP");
+let numbers = [1, 2, 3, 4, 5];
+let transformedNumbers = [];
+
+for (let index = 0; index < numbers.length; index += 1) {
+  let currentNum = numbers[index];
+  let squaredNum = currentNum * currentNum;
+
+  transformedNumbers.push(squaredNum);
+}
+
+console.log(transformedNumbers); // => [1, 4, 6, 16, 25]
+
+// map transformation
+console.log("MAP METHOD");
+let numbers1 = [1, 2, 3, 4, 5];
+let transformatedNumbers2 = numbers1.map(currentNum => currentNum * currentNum);
+
+console.log(transformatedNumbers2); // => [1, 4, 6, 16, 25]
+
+console.log("EXAMPLE 1");
+// EXAMPLE 1
+[[1, 2], [3, 4]].forEach(arr => console.log(arr[0]));
+// 1
+// 3
+
