@@ -1,0 +1,14 @@
+/*
+P: PROBLEM
+
+A: ALGORITHM
+
+START
+
+  1.
+
+END
+
+*/
+
+// C: CODE WITH INTENT
