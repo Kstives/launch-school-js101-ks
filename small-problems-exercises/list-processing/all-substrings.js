@@ -61,11 +61,36 @@ END
 
 // C: CODE WITH INTENT
 
-function substrings(inputString) {
+function leadingSubstrings(inputString) {
+  let outputArray = [];
 
+  for (let char = 1; char <= inputString.length; char += 1) {
+    outputArray.push(inputString.substring(0, char));
+  }
+
+  return outputArray;
 }
 
-substrings('abcde');
+function substrings(inputString) {
+  let stringCopy = inputString;
+  let outputArray = [];
+
+  for (let counter = 0; counter < inputString.length; counter += 1) {
+    outputArray.push(leadingSubstrings(stringCopy));
+    stringCopy = stringCopy.split('');
+    stringCopy.shift();
+    stringCopy = stringCopy.join('');
+  }
+
+  return outputArray.flat();
+  
+}
+
+// console.log(leadingSubstrings('abc'));      // ["a", "ab", "abc"]
+// console.log(leadingSubstrings('a'));        // ["a"]
+// console.log(leadingSubstrings('xyzzy'));    // ["x", "xy", "xyz", "xyzz", "xyzzy"]
+
+console.log(substrings('abcde'));
 // returns
 /*
 [ "a", "ab", "abc", "abcd", "abcde",
@@ -73,4 +98,15 @@ substrings('abcde');
   "c", "cd", "cde",
   "d", "de",
   "e" ]
+*/
+
+/*
+Further Exploration
+
+Rewrite substrings using list processing functions. That is,
+convert the string into an array of some sort and use
+functions like map, filter, or reduce to get the desired
+substrings. (You will also need to use join.) Try not to use
+forEach as that is too similar to the for loop approach.
+
 */
